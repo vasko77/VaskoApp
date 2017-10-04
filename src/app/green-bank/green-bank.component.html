@@ -5,7 +5,26 @@
       <h1 class="panel-title">Green bank</h1>
     </div>
     <div class="panel-body">
-      Panel content
+
+        <div class="form-group-lg">
+            <label for="balance" class="col-sm-3 control-label green">Current Account Balance:</label>
+            <div class="col-sm-7">
+              <input type="text" name="" id="balance" class="form-control" value="" required="required" readonly>
+            </div>
+          </div>
+    
+          <br />
+          <br />
+          <br />
+    
+          <div class="form-group-lg">
+            <label for="amount" class="col-sm-3 control-label blue">Amount to Transfer to Blue:</label>
+            <div class="col-sm-7">
+              <input [(ngModel)]="amount" type="number" name="" id="amount" class="form-control" value="" required="required" >
+            </div>
+            <button type="button" (click)="transfer()" class="btn btn-lg btn-primary col-sm-1">Transfer</button>
+          </div>
+    
     </div>
   </div>
 </div>

@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GreenBankComponent implements OnInit {
 
+  amount: number;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  transfer() {
+    console.log( `Transfer clicked with amount ${this.amount}` );
   }
 
 }

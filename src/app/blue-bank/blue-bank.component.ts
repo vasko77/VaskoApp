@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BlueBankComponent implements OnInit {
 
+  amount: number;
+
   constructor() { }
 
   ngOnInit() {
   }
+
+  transfer() {
+    console.log( `Transfer clicked with amount ${this.amount}` );
+  }
+
 
 }
