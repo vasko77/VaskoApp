@@ -9,6 +9,8 @@ import { FooterComponent } from './footer/footer.component';
 import { BodyComponent } from './body/body.component';
 import { BlueBankComponent } from './blue-bank/blue-bank.component';
 import { GreenBankComponent } from './green-bank/green-bank.component';
+import { TransferService } from './services/transfer.service';
+import { BalanceService } from './services/balance.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,7 @@ import { GreenBankComponent } from './green-bank/green-bank.component';
     FormsModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [TransferService, BalanceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

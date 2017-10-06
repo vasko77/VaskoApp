@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BalanceService, Bank } from '../services/balance.service';
 
 @Component({
   // selector: 'app-blue-bank',
@@ -7,11 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BlueBankComponent implements OnInit {
 
+  balance: number;
   amount: number;
 
-  constructor() { }
+  constructor(private balanceSerice: BalanceService) { }
 
   ngOnInit() {
+    this.balance = this.balanceSerice.getBalance( Bank.Blue );
   }
 
   transfer() {
