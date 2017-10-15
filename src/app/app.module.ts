@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +12,7 @@ import { BlueBankComponent } from './blue-bank/blue-bank.component';
 import { GreenBankComponent } from './green-bank/green-bank.component';
 import { TransferService } from './services/transfer.service';
 import { BalanceService } from './services/balance.service';
+import { LogggingService } from './services/loggging.service';
 
 @NgModule({
   declarations: [
@@ -24,9 +26,10 @@ import { BalanceService } from './services/balance.service';
   imports: [
     BrowserModule,
     FormsModule,
+    HttpModule,
     AppRoutingModule
   ],
-  providers: [TransferService, BalanceService],
+  providers: [TransferService, BalanceService, LogggingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

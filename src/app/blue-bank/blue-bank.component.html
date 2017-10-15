@@ -17,13 +17,24 @@
       <br />
       <br />
 
-      <div class="form-group-lg">
-        <label for="amount" class="col-sm-3 control-label green">Amount to Transfer to Green:</label>
-        <div class="col-sm-7">
-          <input [(ngModel)]="amount" type="number" id="amount" class="form-control" value="" required="required" >
+      <form #form="ngForm" (ngSubmit)="transfer()" novalidate autocomplete="off">
+
+        <div class="form-group-lg">
+
+          <label for="amount" class="col-sm-3 control-label green">Amount to Transfer to Green:</label>
+
+          <div class="col-sm-7">
+            <input [(ngModel)]="amount" type="number" id="amount" name="amount" class="form-control" required="required" placeholder="Amount to transfer">
+            <em *ngIf="(form.controls.amount?.invalid && form.controls.amount?.touched) || mouseOverTransfer && form.form.invalid">Required</em>
+          </div>
+
+          <span (mouseenter)="mouseOverTransfer=true" (mouseleave)="mouseOverTransfer=false">
+            <button type="submit" [disabled]="form.form.invalid" class="btn btn-lg btn-success col-sm-2">Transfer</button>
+          </span>
+
         </div>
-        <button type="button" (click)="transfer()" class="btn btn-lg btn-success col-sm-1">Transfer</button>
-      </div>
+
+      </form>
 
     </div>
   </div>

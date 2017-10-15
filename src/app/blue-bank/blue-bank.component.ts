@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { BalanceService, Bank } from '../services/balance.service';
+import { BalanceService } from '../services/balance.service';
+import { TransferService } from '../services/transfer.service';
+import { blueAccount, greenAccount } from '../shared/constants';
 
 @Component({
   // selector: 'app-blue-bank',
@@ -10,16 +12,39 @@ export class BlueBankComponent implements OnInit {
 
   balance: number;
   amount: number;
+  hash: string;
 
-  constructor(private balanceSerice: BalanceService) { }
+  constructor(private balanceSerice: BalanceService, private transferService: TransferService) { }
 
   ngOnInit() {
-    this.balance = this.balanceSerice.getBalance( Bank.Blue );
+    this.getBalance();
   }
 
   transfer() {
-    console.log( `Transfer clicked with amount ${this.amount}` );
+
+    this.transferService.transfer(blueAccount, greenAccount, this.amount)
+      .subscribe((hash: string) => {
+        this.hash = hash;
+        console.log(`Transfer completed with hash ${this.hash}`);
+      },
+      (error: any) => {
+        console.error(error);
+      }
+      );
+
+    this.getBalance();
   }
 
+  getBalance() {
+    this.balanceSerice.getBalance(blueAccount)
+      .subscribe(
+      (result: number) => {
+        this.balance = result;
+      },
+      (error: any) => {
+        console.error(error);
+      }
+      );
+  }
 
 }

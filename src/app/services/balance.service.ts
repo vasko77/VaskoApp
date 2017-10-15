@@ -1,27 +1,37 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
+import { Http, Response } from '@angular/http';
+import { LogggingService } from './loggging.service';
+
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
 
 @Injectable()
-export class BalanceService {
+export class BalanceService implements OnInit {
 
-  constructor() { }
+  constructor(private http: Http, private logging: LogggingService) {
+    this.http = http;
+    this.logging = logging;
+  }
 
-  getBalance(bank: Bank): number {
+  ngOnInit(): void {
+  }
 
-    switch (bank) {
-      case Bank.Blue:
-        console.log( 'Getting Blue Bank Balance' );
-        return 10000;
+  getBalance(account: string): Observable<number> {
 
-     case Bank.Green:
-        console.log( 'Getting Green Bank Balance' );
-        return 20000;
-      }
+    const url = `http://91.194.90.29:8008/api/v1/accounts/${account}/balance`;
+
+    return this.http.get( url )
+    .map( (respones: Response) => {
+      const balance = respones.json().Balance as number;
+      return balance;
+    } )
+    .catch( ( error: any ) => {
+      const errorMessage = this.logging.logError( error );
+      return Observable.throw( errorMessage );
+    } );
 
   }
 
-}
-
-export enum Bank {
-  Blue,
-  Green
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BalanceService, Bank } from '../services/balance.service';
+import { BalanceService } from '../services/balance.service';
 
 @Component({
   // selector: 'app-green-bank',
@@ -14,8 +14,16 @@ export class GreenBankComponent implements OnInit {
   constructor(private balanceSerice: BalanceService) { }
 
   ngOnInit() {
-    this.balance = this.balanceSerice.getBalance( Bank.Green );
-  }
+    this.balanceSerice.getBalance( '0x10BfCB0883a9bC56A9C3b3b817ff4e289Dbb6e42' )
+    .subscribe(
+        ( result: number ) => {
+          this.balance = result;
+        },
+        ( error: any ) => {
+          console.error( error );
+        }
+      );
+}
 
   transfer() {
     console.log( `Transfer clicked with amount ${this.amount}` );
