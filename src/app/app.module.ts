@@ -2,6 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BusyModule } from 'angular2-busy';
+
+import {ToastModule} from 'ng2-toastr/ng2-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,6 +31,9 @@ import { LogggingService } from './services/loggging.service';
     BrowserModule,
     FormsModule,
     HttpModule,
+    BrowserAnimationsModule,
+    BusyModule,
+    ToastModule.forRoot(),
     AppRoutingModule
   ],
   providers: [TransferService, BalanceService, LogggingService],
