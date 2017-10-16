@@ -13,13 +13,12 @@ import { Subscription } from 'rxjs/Subscription';
 export class BlueBankComponent implements OnInit {
 
   mouseOverTransfer: boolean;
+  busyBalance: Subscription;
+  busyTransfer: Subscription;
 
   balance: number;
   amount: number;
   hash: string;
-
-  busyBalance: Subscription;
-  busyTransfer: Subscription;
 
   constructor(
     private balanceSerice: BalanceService,

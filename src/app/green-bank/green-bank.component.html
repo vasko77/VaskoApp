@@ -1,30 +1,66 @@
 <br/>
-<div class="container">
-  <div class="panel panel-success">
+<div class="container" [ngBusy]="[busyBalance, busyTransfer]">
+  <div class="panel panel-primary">
     <div class="panel-heading">
       <h1 class="panel-title">Green bank</h1>
     </div>
     <div class="panel-body">
 
-        <div class="form-group-lg">
-            <label for="balance" class="col-sm-3 control-label green">Current Account Balance:</label>
-            <div class="col-sm-7">
-              <input [ngModel]="balance" type="text" name="" id="balance" class="form-control" required="required" readonly>
-            </div>
+      <div class="form-group-lg row">
+        <label for="balance" class="col-sm-3 control-label green">Current Account Balance:</label>
+        <div class="col-sm-7">
+          <div class="input-group">
+            <input [ngModel]="balance | number" 
+                   type="text" id="balance" class="form-control" required="required" readonly>
+            <span class="input-group-addon" id="balance">
+              <span class="glyphicon glyphicon-refresh" (click)="getBalance()"></span>
+            </span>
+          </div>        
+        </div>
+      </div>
+
+      <br />
+
+      <form #form="ngForm" (ngSubmit)="transfer()" novalidate autocomplete="off">
+
+        <div class="form-group-lg row">
+
+          <label for="amount" class="col-sm-3 control-label blue">Amount to Transfer to Blue:</label>
+
+          <div class="col-sm-7">
+            <input [(ngModel)]="amount" type="number" id="amount" name="amount" class="form-control" required="required" placeholder="Amount to transfer">
+            <em *ngIf="(form.controls.amount?.invalid && form.controls.amount?.touched) || mouseOverTransfer && form.form.invalid">Required</em>
           </div>
-    
-          <br />
-          <br />
-          <br />
-    
-          <div class="form-group-lg">
-            <label for="amount" class="col-sm-3 control-label blue">Amount to Transfer to Blue:</label>
-            <div class="col-sm-7">
-              <input [(ngModel)]="amount" type="number" name="" id="amount" class="form-control" value="" required="required" >
-            </div>
-            <button type="button" (click)="transfer()" class="btn btn-lg btn-primary col-sm-1">Transfer</button>
-          </div>
-    
+
+        </div>
+
+        <br />
+
+        <div class="row">
+
+          <div class="col-sm-offset-3 col-sm-2">
+            <span (mouseenter)="mouseOverTransfer=true" (mouseleave)="mouseOverTransfer=false">
+              <button type="submit" [disabled]="form.form.invalid" class="btn btn-lg btn-primary">Transfer</button>
+            </span>
+          </div>       
+
+        </div>
+
+      </form>
+
+      <br />
+      
+      <div class="form-group-lg row">
+      
+          <label for="hash" class="col-sm-3 control-label">Transaction Hash:</label>
+
+          <div class="col-sm-9">
+            <input [ngModel]="hash" type="text" id="hash" class="form-control" readonly>
+
+        </div>
+  
+      </div>
+
     </div>
   </div>
 </div>
